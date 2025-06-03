@@ -1,25 +1,60 @@
 {
-  "name": "tounament-backend",
+  "name": "tournament-api",
   "version": "1.0.0",
+  "description": "Tournament management API with payment integration",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "setup": "node setup-database.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "db:migrate": "node database/migrate.js",
+    "db:seed": "node database/seed.js"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "tournament",
+    "gaming",
+    "payment",
+    "razorpay",
+    "nodejs",
+    "express",
+    "mysql"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
-    "bcrypt": "^6.0.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.1",
-    "node-cron": "^4.0.5",
-    "nodemon": "^3.1.10",
-    "razorpay": "^2.9.6",
-    "twilio": "^5.6.1"
+    "morgan": "^1.10.0",
+    "mysql2": "^3.6.0",
+    "razorpay": "^2.9.2",
+    "tournament-api": "file:",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "jest": "^29.6.2",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-repository-url"
   }
 }
