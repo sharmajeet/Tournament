@@ -10,6 +10,9 @@ const createOrder = async (req, res, next) => {
     const { amount, currency = 'INR', gameId, slotId } = req.body;
     const { email } = req.user;
     
+    console.log("At controller of payment", amount, currency, gameId, slotId);
+    console.log("User info:", req.user);
+    
     logger.info('Payment order creation:', { email, amount, gameId, slotId });
     
     const order = await paymentService.createOrder({
@@ -21,18 +24,20 @@ const createOrder = async (req, res, next) => {
     });
     
     res.status(201).json(
-      createResponse(true, 'Payment order created successfully', {
-        orderId: order.id,
-        amount: order.amount,
-        currency: order.currency,
-        key: process.env.RAZORPAY_KEY_ID
-      })
-    );
+  createResponse(true, 'Payment order created successfully', {
+    orderId: order.id,
+    amount: order.amount / 100,   // convert paise back to rupees here
+    currency: order.currency,
+    key: process.env.RAZORPAY_KEY_ID
+  })
+);
+
   } catch (error) {
     logger.error('Create order error:', { email: req.user?.email, error: error.message });
     next(error);
   }
 };
+
 
 /**
  * Verify payment signature

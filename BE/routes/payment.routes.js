@@ -11,25 +11,27 @@ const { handleValidationErrors } = require('../middleware/validation');
  * @desc    Create Razorpay order
  * @access  Private
  */
-router.post('/create-order', [
-  authenticateToken,
-  body('amount')
-    .isFloat({ min: 1 })
-    .withMessage('Amount must be greater than 0'),
-  body('currency')
-    .optional()
-    .isIn(['INR', 'USD'])
-    .withMessage('Currency must be INR or USD'),
-  body('gameId')
-    .optional()
-    .isInt({ min: 1 })
-    .withMessage('Game ID must be a positive integer'),
-  body('slotId')
-    .optional()
-    .isInt({ min: 1 })
-    .withMessage('Slot ID must be a positive integer'),
-  handleValidationErrors
-], paymentController.createOrder);
+// router.post('/create-order', [
+//   authenticateToken,
+//   body('amount')
+//     .isFloat({ min: 1 })
+//     .withMessage('Amount must be greater than 0'),
+//   body('currency')
+//     .optional()
+//     .isIn(['INR', 'USD'])
+//     .withMessage('Currency must be INR or USD'),
+//   body('gameId')
+//     .optional()
+//     .isInt({ min: 1 })
+//     .withMessage('Game ID must be a positive integer'),
+//   body('slotId')
+//     .optional()
+//     .isInt({ min: 1 })
+//     .withMessage('Slot ID must be a positive integer'),
+//   handleValidationErrors
+// ], paymentController.createOrder);
+
+router.post('/create-order', authenticateToken, paymentController.createOrder);
 
 /**
  * @route   POST /api/v1/payments/verify

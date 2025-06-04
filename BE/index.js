@@ -14,6 +14,15 @@ const { PORT, NODE_ENV } = require('./config/environment');
 const errorHandler = require('./middleware/errorHandler');
 const { logger } = require('./utils/logger');
 
+// Security middleware
+app.use(helmet());
+app.use(cors());
+
+// Request parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+
 // Import routes
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
@@ -21,13 +30,6 @@ const gameRoutes = require('./routes/game.routes');
 const slotRoutes = require('./routes/slot.routes');
 const paymentRoutes = require('./routes/payment.routes');
 
-// Security middleware
-app.use(helmet());
-app.use(cors());
-
-// Request parsing middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Logging middleware
 if (NODE_ENV !== 'test') {

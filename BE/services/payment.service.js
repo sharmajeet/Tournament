@@ -17,6 +17,7 @@ const razorpayInstance = new Razorpay({
  */
 const createOrder = async (orderData) => {
   try {
+    console.log("At Service of payment" , orderData);
     const { amount, currency, userEmail, gameId, slotId } = orderData;
     
     // Get user
